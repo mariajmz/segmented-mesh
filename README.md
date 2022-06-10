@@ -1,1 +1,3 @@
-# segmented-mesh
+# Estudio de un detector segmented-mesh microbulk en Fisica de Sucesos Raros
+
+En este trabajo ...
