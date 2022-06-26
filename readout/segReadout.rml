@@ -1,0 +1,148 @@
+<?xml version="1.0" ?>
+<readouts>
+    <globals>
+		<!-- Tamaño en mm -->
+        <variable name="PITCH" value="1" overwrite="false" />	
+        <variable name="N_CHANNELS_A" value="25" overwrite="false" />
+		<variable name="N_CHANNELS_B" value="64" overwrite="false" />
+    </globals>
+
+    <TRestDetectorReadout name="segmented" title="Segmented Readout" verboseLevel="info">
+
+        <constant name="pitch" value="${PITCH}" overwrite="false" />
+
+        <constant name="nChannels_A" value="${N_CHANNELS_A}" overwrite="false" /> //25
+		<constant name="nChannels_B" value="${N_CHANNELS_B}" overwrite="false" /> //64
+		<constant name="nChannels_C" value="${N_CHANNELS_A}*2" overwrite="false" /> //50
+        <constant name="pS_Izq_Top" value="${PITCH}*2" />
+		<constant name="pS_Izq_Bott" value="${PITCH}" />
+		<constant name="pS_Dch_Top" value="${PITCH}/2" />
+		<constant name="pS_Dch_Bott" value="${PITCH}*3/4" />
+
+		//duda
+        <parameter name="mappingNodes" value="4*nChannels_A" />
+
+		//Izquierda Arriba (25+25 pixel 2mm)
+
+        <readoutModule name="x_Izq_Top_Module" size="(nChannels_A*pS_Izq_Top, nChannels_A*pS_Izq_Top)" tolerance="1.e-4" >
+            <for variable="nCh" from="0" to="nChannels_A-1" step="1" >
+                // The readout channel id will be used to identify the channel inside the module
+                //and associate it to a daq id
+                    <readoutChannel id="${nCh}" >
+                        // In this example we define one pixel per channel. 
+                        // But we can define any number of pixels inside a channel
+                        <addPixel id="0" origin="(0,${nCh}*pS_Izq_Top)" size="(pS_Izq_Top*nChannels_A,pS_Izq_Top)" rotation="0" />
+                    </readoutChannel>
+            </for>
+        </readoutModule>
+
+        <readoutModule name="y_Izq_Top_Module" size="(nChannels_A*pS_Izq_Top, nChannels_A*pS_Izq_Top)" tolerance="1.e-4" >
+            <for variable="nCh" from="0" to="nChannels_A-1" step="1" >
+                // The readout channel id will be used to identify the channel inside the module
+                //and associate it to a daq id
+                    <readoutChannel id="${nCh}" >
+                        // In this example we define one pixel per channel. 
+                        // But we can define any number of pixels inside a channel
+                        <addPixel id="0" origin="(${nCh}*pS_Izq_Top, 0)" size="(pS_Izq_Top,nChannels_A*pS_Izq_Top)" rotation="0" />
+                    </readoutChannel>
+            </for>
+        </readoutModule>
+
+		//Derecha Arriba (64+64 pixel 0.5mm)
+
+        <readoutModule name="x_Dch_Top_Module" size="(nChannels_B*pS_Dch_Top, nChannels_B*pS_Dch_Top)" tolerance="1.e-4" >
+            <for variable="nCh" from="0" to="nChannels_B-1" step="1" >
+                // The readout channel id will be used to identify the channel inside the module
+                //and associate it to a daq id
+                    <readoutChannel id="${nCh}" >
+                        // In this example we define one pixel per channel. 
+                        // But we can define any number of pixels inside a channel
+                        <addPixel id="0" origin="(0,${nCh}*pS_Dch_Top)" size="(pS_Dch_Top*nChannels_B,pS_Dch_Top)" rotation="0" />
+                    </readoutChannel>
+            </for>
+        </readoutModule>
+
+        <readoutModule name="y_Dch_Top_Module" size="(nChannels_B*pS_Dch_Top, nChannels_B*pS_Dch_Top)" tolerance="1.e-4" >
+            <for variable="nCh" from="0" to="nChannels_B-1" step="1" >
+                // The readout channel id will be used to identify the channel inside the module
+                //and associate it to a daq id
+                    <readoutChannel id="${nCh}" >
+                        // In this example we define one pixel per channel. 
+                        // But we can define any number of pixels inside a channel
+                        <addPixel id="0" origin="(${nCh}*pS_Dch_Top, 0)" size="(pS_Dch_Top,nChannels_B*pS_Dch_Top)" rotation="0" />
+                    </readoutChannel>
+            </for>
+        </readoutModule>
+
+
+		//Izquierda Abajo (50+50 pixel 1mm)
+
+        <readoutModule name="x_Izq_Bott_Module" size="(nChannels_C*pS_Izq_Bott, nChannels_C*pS_Izq_Bott)" tolerance="1.e-4" >
+            <for variable="nCh" from="0" to="nChannels_C-1" step="1" >
+                // The readout channel id will be used to identify the channel inside the module
+                //and associate it to a daq id
+                    <readoutChannel id="${nCh}" >
+                        // In this example we define one pixel per channel. 
+                        // But we can define any number of pixels inside a channel
+                        <addPixel id="0" origin="(0,${nCh}*pS_Izq_Bott)" size="(pS_Izq_Bott*nChannels_C,pS_Izq_Bott)" rotation="0" />
+                    </readoutChannel>
+            </for>
+        </readoutModule>
+
+        <readoutModule name="y_Izq_Bott_Module" size="(nChannels_C*pS_Izq_Bott, nChannels_C*pS_Izq_Bott)" tolerance="1.e-4" >
+            <for variable="nCh" from="0" to="nChannels_C-1" step="1" >
+                // The readout channel id will be used to identify the channel inside the module
+                //and associate it to a daq id
+                    <readoutChannel id="${nCh}" >
+                        // In this example we define one pixel per channel. 
+                        // But we can define any number of pixels inside a channel
+                        <addPixel id="0" origin="(${nCh}*pS_Izq_Bott, 0)" size="(pS_Izq_Bott,nChannels_C*pS_Izq_Bott)" rotation="0" />
+                    </readoutChannel>
+            </for>
+        </readoutModule>
+
+		//Derecha Abajo (64+64 pixel 0.75mm)
+
+        <readoutModule name="x_Dch_Bott_Module" size="(nChannels_B*pS_Dch_Bott, nChannels_B*pS_Dch_Bott)" tolerance="1.e-4" >
+            <for variable="nCh" from="0" to="nChannels_B-1" step="1" >
+                // The readout channel id will be used to identify the channel inside the module
+                //and associate it to a daq id
+                    <readoutChannel id="${nCh}" >
+                        // In this example we define one pixel per channel. 
+                        // But we can define any number of pixels inside a channel
+                        <addPixel id="0" origin="(0,${nCh}*pS_Dch_Bott)" size="(pS_Dch_Bott*nChannels_B,pS_Dch_Bott)" rotation="0" />
+                    </readoutChannel>
+            </for>
+        </readoutModule>
+
+        <readoutModule name="y_Dch_Bott_Module" size="(nChannels_B*pS_Dch_Bott, nChannels_B*pS_Dch_Bott)" tolerance="1.e-4" >
+            <for variable="nCh" from="0" to="nChannels_B-1" step="1" >
+                // The readout channel id will be used to identify the channel inside the module
+                //and associate it to a daq id
+                    <readoutChannel id="${nCh}" >
+                        // In this example we define one pixel per channel. 
+                        // But we can define any number of pixels inside a channel
+                        <addPixel id="0" origin="(${nCh}*pS_Dch_Bott, 0)" size="(pS_Dch_Bott,nChannels_B*pS_Dch_Bott)" rotation="0" />
+                    </readoutChannel>
+            </for>
+        </readoutModule>
+
+
+
+	<readoutPlane position="(0,0,-250)mm" planeVector="(0,0,1)" chargeCollection="1" cathodePosition="(0,0,250)mm">
+		<addReadoutModule id="0" name="x_Izq_Top_Module" origin="(-51,1)" rotation="0" decodingFile="" firstDaqChannel="0" />
+		<addReadoutModule id="1" name="x_Dch_Top_Module" origin="(1,1)" rotation="0" decodingFile="" firstDaqChannel="1000" />
+		<addReadoutModule id="2" name="x_Izq_Bott_Module" origin="(-51,-51)" rotation="0" decodingFile="" firstDaqChannel="2000" />
+		<addReadoutModule id="3" name="x_Dch_Bott_Module" origin="(1,-49)" rotation="0" decodingFile="" firstDaqChannel="3000" />
+
+	</readoutPlane>
+
+	<readoutPlane position="(0,0,-250)mm" planeVector="(0,0,1)" chargeCollection="1" cathodePosition="(0,0,250)mm">
+		<addReadoutModule id="0" name="y_Izq_Top_Module" origin="(-51,1)" rotation="0" decodingFile="" firstDaqChannel="500" />
+		<addReadoutModule id="1" name="y_Dch_Top_Module" origin="(1,1)" rotation="0" decodingFile="" firstDaqChannel="1500" />
+		<addReadoutModule id="2" name="y_Izq_Bott_Module" origin="(-51,-51)" rotation="0" decodingFile="" firstDaqChannel="2500" />
+		<addReadoutModule id="3" name="y_Dch_Bott_Module" origin="(1,-49)" rotation="0" decodingFile="" firstDaqChannel="3500" />
+	</readoutPlane>
+
+    </TRestDetectorReadout>
+</readouts>
